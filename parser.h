@@ -41,4 +41,12 @@ int parsePM(unsigned char *datagram, int *result);
  */
 int parsePhAndTemp(unsigned char *datagram, float *result);
 
+/**
+ * Parse the NH3 datagram received from UART
+ * @param datagram
+ * @param result
+ * @return 0 for succeed | -1 for error
+ */
+int parseNH3(unsigned char *datagram, int *result);
+
 #endif //ENVDATACOLLECTOR_PARSER_H

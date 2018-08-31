@@ -18,6 +18,7 @@ int main() {
     float soil_data[2];
     float air_data[2];
     int pm_data[3];
+    int nh3_data[2];
     float ph_data[2];
     char sql[MAX_SQL_SIZE];
     unsigned char recv_uart_buf[MAX_RECV_BUF];
@@ -107,6 +108,22 @@ int main() {
             execSQL(sql);
             bzero(sql, MAX_SQL_SIZE);
             genTempOrHumOrPhSQL(sql, ph_data[1], IS_PH_SENSOR, IS_PH, PH_TEMP_SENSOR_ADDR);
+            execSQL(sql);
+*/
+            sleep(5);
+
+            bzero(recv_uart_buf, MAX_RECV_BUF);
+            openUart(dev);
+            initUart();
+            sendToUart(nh3_inq, UART_SEND_LEN);
+            recvFromUart(recv_uart_buf, NH3_RECV_LEN);
+            closeUart();
+            bzero(nh3_data, 2);
+            parseNH3(recv_uart_buf, nh3_data);
+            printf("[NH3 Data] HH3 = %d ppm\n\n", nh3_data[0]);
+/*          TODO: UNCOMMENT THIS SEGMENT TO ACTIVATE THE SQL
+            bzero(sql, MAX_SQL_SIZE);
+            genPMOrNH3SQL(sql, nh3_data[0], IS_NH3_SENSOR, IS_NH3, NH3_SENSOR_ADDR);
             execSQL(sql);
 */
             sleep(5);

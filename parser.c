@@ -93,11 +93,31 @@ int parsePhAndTemp(unsigned char *datagram, float *result) {
     result[0] = tempRes;
     result[1] = phRes;
 
-    if(result[0] >= 100 || result[1] < 0 || result[1] > 14) {
+    if (result[0] >= 100 || result[1] < 0 || result[1] > 14) {
         printf("Failed to parse pH & temp datagram!\n");
         return -1;
-    }else {
+    } else {
         printf("Successfully parsed pH & temp datagram!\n");
+        return 0;
+    }
+}
+
+int parseNH3(unsigned char *datagram, int *result) {
+    unsigned short concRaw;
+    int concRes;
+
+    concRaw = 0x0000;
+    concRaw |= datagram[3] << 8;
+    concRaw |= datagram[4];
+
+    concRes = (int)concRaw;
+    result[0] = concRes;
+
+    if (concRes < 0 || concRes > 500) {
+        printf("Failed to parse NH3 datagram!\n");
+        return -1;
+    } else {
+        printf("Successfully parsed NH3 datagram!\n");
         return 0;
     }
 }

@@ -22,10 +22,10 @@ MYSQL *g_conn;
 MYSQL_RES *g_res;
 MYSQL_ROW g_row;
 
-static char *g_host_name = "xxx.xxx.xxx.xxx";
-static char *g_user_name = "xxxxxx";
-static char *g_password = "xxxxxx";//server passwd: hzau2018
-static char *g_db_name = "xxxxxx";
+static char *g_host_name = "*****";
+static char *g_user_name = "*****";
+static char *g_password = "*****";
+static char *g_db_name = "*****";
 static unsigned int g_db_port = 3306;
 
 /**
